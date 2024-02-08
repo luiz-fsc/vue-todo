@@ -1,12 +1,9 @@
 <template>
   <v-app id="inspire">
-    <!-- <v-navigation-drawer v-model="drawer"> -->
-    <!--  -->
-    <!-- </v-navigation-drawer> -->
 
     <v-navigation-drawer 
       v-model="drawer"
-      temporary=""
+      temporary
     >
       <v-list>
         <v-list-item title="Lista de Tarefas" subtitle="Vue.js e Vuetify"></v-list-item>
@@ -15,8 +12,14 @@
       <v-divider></v-divider>
 
       <v-list density="compact" nav>
-        <v-list-item prepend-icon="mdi-view-dashboard" title="Home" value="home"></v-list-item>
-        <v-list-item prepend-icon="mdi-forum" title="About" value="about"></v-list-item>
+        <v-list-item
+          v-for="item in items"
+          :key="item.title"
+          :prepend-icon="item.icon"
+          :title="item.title"
+          :value="item.value"
+        >
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
@@ -40,6 +43,20 @@ const drawer = ref(null)
 
 <script>
 export default {
-  data: () => ({ drawer: null }),
+  data: () => ({
+    drawer: null,
+    items: [
+      {
+        title: 'Tarefas',
+        value: 'home',
+        icon: 'mdi-check-circle',
+      },
+      {
+        title: 'Sobre',
+        value: 'about',
+        icon: 'mdi-information',
+      },
+    ],
+  }),
 }
 </script>
